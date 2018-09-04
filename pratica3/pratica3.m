@@ -30,11 +30,11 @@ for i = 1:679
 endfor
 
 #exibe a imagem de saida na tela 
-#imshow(img2)
+imshow(img2)
 
 #plotando o histograma da imagem de saida
-axis([0 250 0 4000])
-plot(imhist(img2));
+#axis([0 250 0 4000])
+figure,plot(o,aux);
 title("Histograma Equalizado")
 
 #salva a imagem no disco 
