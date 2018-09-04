@@ -29,6 +29,14 @@ for i = 1:679
   endfor
 endfor
 
-imshow(img2);
-#plot(img2);
+#exibe a imagem de saida na tela 
+#imshow(img2)
+
+#plotando o histograma da imagem de saida
+axis([0 250 0 4000])
+plot(imhist(img2));
+title("Histograma Equalizado")
+
+#salva a imagem no disco 
+imwrite(img2,'output_imgage.jpg');
 #histograma(89)
