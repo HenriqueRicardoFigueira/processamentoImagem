@@ -4,14 +4,14 @@ function bra = distanciaEuclidiana(u, v, p, q)
   bra = (((u - p/2) ^ 2) + ((v - q/2) ^ 2)) ^ (1/2);
 endfunction
 
-function res = filtroPassaBaixa(imagem, P, Q)       # 7
+function res = filtroPassaBaixa(imagem, P, Q)   # 7
   D0 = 20;
   h = zeros(P, Q);
 
   for u=1:P
     for v=1:Q
       Duv = distanciaEuclidiana(u, v, P, Q);
-      h(u, v) = e ^ ((-Duv ^ 2) / (2 * (D0 ^ 2)));
+      h(u, v) = e ^ (-(Duv ^ 2) / (2 * (D0 ^ 2)));
     end
   end
   res = h;
@@ -30,18 +30,14 @@ imgTransformada = fftshift(imgTransformada);  # 5
 figure, imshow(uint8(abs(imgTransformada)));  # 6
 
 filtro = filtroPassaBaixa(imgTransformada, P, Q);
+figure, imshow(filtro);
 imgFiltro = imgTransformada .* filtro;        # 8
-figure, imshow(real(imgFiltro));
-imgTransformada = ifftshift(imgTransformada); # 9
-imgTransformada = ifft2(imgTransformada);     # 10
-imgTransformada = real(imgTransformada);      # 11
+imgFiltro = ifftshift(imgFiltro);             # 9
+imgFiltro = ifft2(imgFiltro);                 # 10
+imgFiltro = real(imgFiltro);                  # 11
 
 # 12
 imgSaida = zeros(M, N);
-for x=1:M
-  for y=1:N
-    imgSaida(x, y) = imgTransformada(x, y);
-  end
-end
+imgSaida = imgFiltro(1:M, 1:N);
 
 figure, imshow(im2uint8(imgSaida));
