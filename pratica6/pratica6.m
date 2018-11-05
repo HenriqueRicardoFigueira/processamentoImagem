@@ -3,7 +3,8 @@ pkg load image;                         # 1
 function bra = distanciaEuclidiana(u, v, p, q)
   bra = (((u - p/2) ^ 2) + ((v - q/2) ^ 2)) ^ (1/2);
 endfunction
-
+#A transformada tera o dobro de linhas e colunas da imagem original,
+#a parte que sobra de imagem e preenchida com 0s, formando uma imagem preta ao redor.
 function res = filtroPassaBaixa(imagem, P, Q)   # 7
   D0 = 20;
   h = zeros(P, Q);
