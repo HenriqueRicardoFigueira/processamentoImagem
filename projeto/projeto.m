@@ -2,8 +2,8 @@ pkg load image;
 
 imgEntradaOriginal = imread('Imagem.jpg');
 
-imgEntrada = im2double(rgb2hsv(imgEntradaOriginal));
-imgEntrada = imgEntrada(:,:,3);
+imgConvertida = im2double(rgb2hsv(imgEntradaOriginal));
+imgEntrada = imgConvertida(:,:,3);
 
 # tamanho da imagem
 [M, N] = size(imgEntrada);
@@ -28,9 +28,11 @@ imgFiltro = real(imgFiltro);
 
 imgSaida = zeros(M, N);
 imgSaida = imgFiltro(1:M, 1:N);
-imgEntrada = imgSaida;
-#imgEntrada = hsv2rgb(imgEntrada);
-imshow(imgEntrada);
+
+imgConvertida(:,:,3) = imgSaida;
+imgConvertida = hsv2rgb(imgConvertida);
+imshow(imgConvertida);
+imwrite(imgConvertida, "imgsaida.jpg");
 
 #imshow(imgEntradaOriginal);
 #figure, imshow(imgSaida);
